@@ -27,6 +27,13 @@ internal class Program
                 fieldDict.Add($"[{field}]", replacement ?? string.Empty);
             }
 
+            var dateKey = "[Date]";
+            // add date if it doesnt exist
+            if (!fieldDict.Keys.Any(k => k == dateKey))
+            {
+                fieldDict.Add(dateKey, $"{DateTime.Today:dd-MMM-yyyy}");
+            }
+
             Application wordApp = new() { Visible = false };
             Document aDoc = wordApp.Documents.Open(newFileName, ReadOnly: false, Visible: false);
             aDoc.Activate();
